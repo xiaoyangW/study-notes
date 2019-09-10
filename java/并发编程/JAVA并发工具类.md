@@ -67,9 +67,10 @@ java1.5后JAVA API提供了CountDownLatch，也可以实现join的功能并功�
 
 #### CyclicBarrier
 
-同步屏障，
+同步屏障-是让一组线程达到一个同步点时候被堵塞，直到最后一个线程到达这个同步点，屏蔽才会结束所有的线程才会继续执行。
 
 ```java
+//三代表有三个线程同步,如果构造方法中的数字大于等待同步点的线程数或者一个线程永远无法到达同步点时线程就会一直处于堵塞状态
 static CyclicBarrier cyclicBarrier = new CyclicBarrier(3);
 public static void main(String[] args) throws IOException, InterruptedException, BrokenBarrierException {
         Thread thread1 = new Thread(new Runnable() {
@@ -77,6 +78,7 @@ public static void main(String[] args) throws IOException, InterruptedException,
             public void run() {
                 System.out.println("thread1 start.......");
                 try {
+                    //等待其它线程到达同步点
                     cyclicBarrier.await();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -90,6 +92,7 @@ public static void main(String[] args) throws IOException, InterruptedException,
             public void run() {
                 System.out.println("thread2 start.......");
                 try {
+                    //等待其它线程到达同步点
                     cyclicBarrier.await();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -100,6 +103,7 @@ public static void main(String[] args) throws IOException, InterruptedException,
         });
         thread1.start();
         thread2.start();
+        //等待其它线程到达同步点
         cyclicBarrier.await();
     }
 ```
