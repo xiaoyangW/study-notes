@@ -70,7 +70,8 @@ java1.5后JAVA API提供了CountDownLatch，也可以实现join的功能并功�
 同步屏障-是让一组线程达到一个同步点时候被堵塞，直到最后一个线程到达这个同步点，屏蔽才会结束所有的线程才会继续执行。
 
 ```java
-//三代表有三个线程同步,如果构造方法中的数字大于等待同步点的线程数或者一个线程永远无法到达同步点时线程就会一直处于堵塞状态
+//三代表有三个线程同步,如果构造方法中的数字大于等待同步点的线程数
+//或者一个线程永远无法到达同步点时线程就会一直处于堵塞状态
 static CyclicBarrier cyclicBarrier = new CyclicBarrier(3);
 public static void main(String[] args) throws IOException, InterruptedException, BrokenBarrierException {
         Thread thread1 = new Thread(new Runnable() {
